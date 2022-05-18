@@ -3,14 +3,25 @@ import config
 import schedule
 import time
 from threading import Thread
-
-bot = telebot.TeleBot(config.token)
-
 from hh_parsing import parse_data
 from handler_data import handler, prepare_mes
 
+bot = telebot.TeleBot(config.token)
+chat_id = 0
 
 list_data = []
+
+def do_parse():
+    bot.send_message(chat_id, str(time.time()))
+    global list_data
+    parsed_data = parse_data()
+    list_data, data = handler(list_data, parsed_data)
+    messages_data = prepare_mes(data)
+    for i, v in messages_data.items():
+        bot.send_message(chat_id, '\n'.join(v))
+
+
+
 
 def schedule_checker():
     while True:

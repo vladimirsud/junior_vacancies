@@ -1,12 +1,9 @@
 def handler(lst, data):
-    print(lst)
     data_out = []
-
     for i in data:
         if i not in lst:
             data_out.append(i)
             lst.append(i)
-
     return lst, data_out
 
 
@@ -25,7 +22,6 @@ def prepare_mes(data):
 
         if v['salary']:
             lst_data.append(f"От {v['salary']['from']} до {v['salary']['from']} {v['salary']['currency']}")
-
         data_dict[i] = lst_data
 
     return data_dict
